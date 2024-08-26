@@ -15,7 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // Searches within appsettings.json
 });
 
-builder.Services.AddScoped<IBookRepository, BookRepository>();  // Wire up repo services
+builder.Services.AddScoped<IBookRepository, BookRepository>();  // Dependency injection to wire up repo services
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();  // Dependency injection to wire up repo services
 
 var app = builder.Build();  // app controls HTTP request pipeline
 
