@@ -6,6 +6,7 @@ using api.Data;
 using api.Dtos.Book;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -20,17 +21,19 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() {
+        public async Task<IActionResult> GetAll() {
 
-            var books = _context.Books.ToList()
-            .Select(s => s.ToBookDto());
+            var books = await _context.Books.ToListAsync();
+
+            var bookDto = books.Select(s => s.ToBookDto());
+
             return Ok(books);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id) {
+        public async Task<IActionResult> GetById([FromRoute] int id) {
 
-            var book = _context.Books.Find(id);
+            var book = await _context.Books.FindAsync(id);
             if (book == null) {
                 return NotFound();
             }
@@ -38,20 +41,20 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateBookRequestDto bookDto) { // Need 'FromBody' since data is sent as JSON
+        public async Task<IActionResult> Create([FromBody] CreateBookRequestDto bookDto) { // Need 'FromBody' since data is sent as JSON
 
             var bookModel = bookDto.ToBookFromCreateDto();
-            _context.Books.Add(bookModel);
-            _context.SaveChanges();
+            await _context.Books.AddAsync(bookModel);
+            await _context.SaveChangesAsync();   // Anything going to database needs await
             // Executes GetById, passes in new object, then returns in the form of ToBookDto
             return CreatedAtAction(nameof(GetById), new { id = bookModel.Id }, bookModel.ToBookDto());
         }
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] UpdateBookRequestDto updateDto) {   // id from route, body from body
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateBookRequestDto updateDto) {   // id from route, body from body
 
-            var bookModel = _context.Books.FirstOrDefault(x => x.Id == id);
+            var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
             if (bookModel == null) {
                 return NotFound();
             }
@@ -65,23 +68,23 @@ namespace api.Controllers
             bookModel.ISBN = updateDto.ISBN;
             bookModel.Description = updateDto.Description;
 
-            _context.SaveChanges();     // Sends to database
+            await _context.SaveChangesAsync();     // Sends to database
 
             return Ok(bookModel.ToBookDto());
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete([FromRoute] int id) {
+        public async Task<IActionResult> Delete([FromRoute] int id) {
             
-            var bookModel = _context.Books.FirstOrDefault(x => x.Id == id);
+            var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
 
             if (bookModel == null) {
                 return NotFound();
             }
 
-            _context.Books.Remove(bookModel);
-            _context.SaveChanges();
+            _context.Books.Remove(bookModel);   // Remove() is not an async function
+            await _context.SaveChangesAsync();
             return NoContent();     // Returns 204 which is the success code for delete
         }
     }
