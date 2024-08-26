@@ -1,4 +1,6 @@
 using api.Data;
+using api.Interfaces;
+using api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // Searches within appsettings.json
 });
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();  // Wire up repo services
 
 var app = builder.Build();  // app controls HTTP request pipeline
 

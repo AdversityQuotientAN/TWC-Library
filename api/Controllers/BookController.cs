@@ -4,26 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Book;
+using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Controllers
+namespace api.Controllers   // Controllers are for manipulating the URLs, not for databases
 {
     [Route("api/book")]
     [ApiController]
     public class BookController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public BookController(ApplicationDbContext context)
+        private readonly IBookRepository _bookRepo;
+        public BookController(ApplicationDbContext context, IBookRepository bookRepo)
         {
+            _bookRepo = bookRepo;
             _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll() {
 
-            var books = await _context.Books.ToListAsync();
+            var books = await _bookRepo.GetAllAsync();
 
             var bookDto = books.Select(s => s.ToBookDto());
 
