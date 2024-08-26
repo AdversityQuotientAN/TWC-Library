@@ -9,5 +9,7 @@ namespace api.Interfaces
     public interface IReviewRepository
     {
         Task<List<Review>> GetAllAsync();
+        Task<Review?> GetByIdAsync(int id);
+        Task<Review> CreateAsync(Review reviewModel);
     }
 }

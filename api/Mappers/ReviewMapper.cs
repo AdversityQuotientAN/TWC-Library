@@ -21,5 +21,16 @@ namespace api.Mappers
                 BookId = reviewModel.BookId
             };
         }
+
+        public static Review ToReviewFromCreate(this CreateReviewDto reviewDto, int bookId) {
+
+            return new Review {
+
+                Title = reviewDto.Title,
+                Body = reviewDto.Body,
+                Rating = reviewDto.Rating,
+                BookId = bookId
+            };
+        }
     }
 }

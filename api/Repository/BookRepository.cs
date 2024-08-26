@@ -18,6 +18,11 @@ namespace api.Repository
             _context = context;   
         }
 
+        public Task<bool> BookExists(int id)
+        {
+            return _context.Books.AnyAsync(b => b.Id == id);
+        }
+
         public async Task<Book> CreateAsync(Book bookModel)
         {
             await _context.Books.AddAsync(bookModel);
@@ -40,18 +45,18 @@ namespace api.Repository
 
         public async Task<List<Book>> GetAllAsync()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(c => c.Reviews).ToListAsync();
         }
 
         public async Task<Book?> GetByIdAsync(int id)
         {
-            return await _context.Books.FindAsync(id);
+            return await _context.Books.Include(c => c.Reviews).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<Book?> UpdateAsync(int id, UpdateBookRequestDto bookDto)
         {
             var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
-            
+
             if (bookModel == null) {
                 return null;
             }

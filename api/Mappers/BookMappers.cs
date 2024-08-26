@@ -16,7 +16,8 @@ namespace api.Mappers
                 Title = bookModel.Title,
                 Author = bookModel.Author,
                 CoverImage = bookModel.CoverImage,
-                Description = bookModel.Description
+                Description = bookModel.Description,
+                Reviews = bookModel.Reviews.Select(r => r.ToReviewDto()).ToList()
             };
         }
 
