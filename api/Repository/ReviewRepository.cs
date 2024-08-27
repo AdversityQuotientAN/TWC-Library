@@ -25,6 +25,20 @@ namespace api.Repository
             return reviewModel;
         }
 
+        public async Task<Review?> DeleteAsync(int id)
+        {
+            var review = await _context.Reviews.FirstOrDefaultAsync(r => r.Id == id);
+
+            if (review == null) {
+                return null;
+            }
+
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+
+            return review;
+        }
+
         public async Task<List<Review>> GetAllAsync()
         {
             return await _context.Reviews.ToListAsync();

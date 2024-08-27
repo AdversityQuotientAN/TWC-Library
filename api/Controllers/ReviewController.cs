@@ -70,5 +70,18 @@ namespace api.Controllers
 
             return Ok(review.ToReviewDto());
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id) {
+
+            var review = await _reviewRepo.DeleteAsync(id);
+
+            if (review == null) {
+                return NotFound("Review doesn't exist!");
+            }
+
+            return Ok(review);
+        }
     }
 }
