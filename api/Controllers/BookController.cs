@@ -78,6 +78,35 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
             return Ok(bookModel.ToBookDto());
         }
 
+        [HttpPut]
+        [Route("checkout/{id:int}")]
+        public async Task<IActionResult> Checkout([FromRoute] int id) {
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var bookModel = await _bookRepo.CheckoutAsync(id);
+
+            if (bookModel == null) {
+                return NotFound();
+            }
+
+            return Ok(bookModel.ToBookDto());
+        }
+        [HttpPut]
+        [Route("return/{id:int}")]
+        public async Task<IActionResult> Return([FromRoute] int id) {
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var bookModel = await _bookRepo.ReturnAsync(id);
+
+            if (bookModel == null) {
+                return NotFound();
+            }
+
+            return Ok(bookModel.ToBookDto());
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id) {

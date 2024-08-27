@@ -16,5 +16,7 @@ namespace api.Interfaces
         Task<Book?> UpdateAsync(int id, UpdateBookRequestDto bookDto);
         Task<Book?> DeleteAsync(int id);
         Task<bool> BookExists(int id);
+        Task<Book?> CheckoutAsync(int id);
+        Task<Book?> ReturnAsync(int id);
     }
 }

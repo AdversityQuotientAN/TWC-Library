@@ -110,5 +110,35 @@ namespace api.Repository
 
             return bookModel;
         }
+
+        public async Task<Book?> CheckoutAsync(int id) {
+
+            var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (bookModel == null) {
+                return null;
+            }
+
+            bookModel.AvailableUntil = DateTime.Now.AddDays(5);
+
+            await _context.SaveChangesAsync();
+
+            return bookModel;
+        }
+
+        public async Task<Book?> ReturnAsync(int id)
+        {
+            var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (bookModel == null) {
+                return null;
+            }
+
+            bookModel.AvailableUntil = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return bookModel;
+        }
     }
 }
