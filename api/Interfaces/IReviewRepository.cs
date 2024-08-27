@@ -11,5 +11,6 @@ namespace api.Interfaces
         Task<List<Review>> GetAllAsync();
         Task<Review?> GetByIdAsync(int id);
         Task<Review> CreateAsync(Review reviewModel);
+        Task<Review?> UpdateAsync(int id, Review reviewModel);
     }
 }

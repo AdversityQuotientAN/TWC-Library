@@ -32,5 +32,15 @@ namespace api.Mappers
                 BookId = bookId
             };
         }
+        
+        public static Review ToReviewFromUpdate(this UpdateReviewRequestDto reviewDto) {
+
+            return new Review {
+
+                Title = reviewDto.Title,
+                Body = reviewDto.Body,
+                Rating = reviewDto.Rating,
+            };
+        }
     }
 }

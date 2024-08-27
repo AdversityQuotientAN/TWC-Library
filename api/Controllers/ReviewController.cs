@@ -55,7 +55,20 @@ namespace api.Controllers
 
             await _reviewRepo.CreateAsync(reviewModel);
 
-            return CreatedAtAction(nameof(GetById), new { id = reviewModel }, reviewModel.ToReviewDto());
+            return CreatedAtAction(nameof(GetById), new { id = reviewModel.Id }, reviewModel.ToReviewDto());
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateReviewRequestDto updateDto) {
+
+            var review = await _reviewRepo.UpdateAsync(id, updateDto.ToReviewFromUpdate());
+
+            if (review == null) {
+                return NotFound("Review not found");
+            }
+
+            return Ok(review.ToReviewDto());
         }
     }
 }
