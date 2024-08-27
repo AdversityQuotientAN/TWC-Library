@@ -59,7 +59,15 @@ namespace api.Repository
             }
             // Filter by availability
             if (query.Availability.HasValue) {
-                books = books.Where(b => b.AvailableUntil < query.Availability);
+                DateTime endOfDay = new DateTime(
+                    query.Availability.Value.Year,
+                    query.Availability.Value.Month,
+                    query.Availability.Value.Day,
+                    23,
+                    59,
+                    59
+                );
+                books = books.Where(b => b.AvailableUntil < endOfDay);
             }
 
             // Sort by title
