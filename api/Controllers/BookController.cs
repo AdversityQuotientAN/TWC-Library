@@ -26,6 +26,8 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         [HttpGet]
         public async Task<IActionResult> GetAll() {
 
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var books = await _bookRepo.GetAllAsync();
 
             var bookDto = books.Select(s => s.ToBookDto());
@@ -33,8 +35,10 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
             return Ok(books);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id) {
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var book = await _bookRepo.GetByIdAsync(id);
             
@@ -48,6 +52,8 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBookRequestDto bookDto) { // Need 'FromBody' since data is sent as JSON
 
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var bookModel = bookDto.ToBookFromCreateDto();
 
             await _bookRepo.CreateAsync(bookModel);
@@ -57,8 +63,10 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateBookRequestDto updateDto) {   // id from route, body from body
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var bookModel = await _bookRepo.UpdateAsync(id, updateDto);
 
@@ -70,9 +78,11 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id) {
             
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var bookModel = await _bookRepo.DeleteAsync(id);
 
             if (bookModel == null) {

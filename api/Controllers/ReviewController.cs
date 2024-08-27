@@ -24,6 +24,10 @@ namespace api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll() {
+
+            // Does all the validation
+            // ModelState inherited from ControllerBase
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             
             var reviews = await _reviewRepo.GetAllAsync();
 
@@ -32,9 +36,11 @@ namespace api.Controllers
             return Ok(reviewDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id) {
             
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var review = await _reviewRepo.GetByIdAsync(id);
 
             if (review == null) {
@@ -44,9 +50,11 @@ namespace api.Controllers
             return Ok(review.ToReviewDto());
         }
 
-        [HttpPost("{bookId}")]
+        [HttpPost("{bookId:int}")]
         public async Task<IActionResult> Create([FromRoute] int bookId, CreateReviewDto reviewDto) {
 
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             if (!await _bookRepo.BookExists(bookId)) {
                 return BadRequest("Book does not exist");
             }
@@ -59,9 +67,11 @@ namespace api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateReviewRequestDto updateDto) {
 
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             var review = await _reviewRepo.UpdateAsync(id, updateDto.ToReviewFromUpdate());
 
             if (review == null) {
@@ -72,9 +82,11 @@ namespace api.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id) {
 
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             var review = await _reviewRepo.DeleteAsync(id);
 
             if (review == null) {
