@@ -14,7 +14,7 @@ namespace api.Repository
     public class BookRepository : IBookRepository   // Repos are there for database calls
     {
         private readonly ApplicationDbContext _context;
-        public BookRepository(ApplicationDbContext context) // Brings in database before use it
+        public BookRepository(ApplicationDbContext context) // Brings in database before using it
         {
             _context = context;   
         }
@@ -48,8 +48,36 @@ namespace api.Repository
         {
             var books = _context.Books.Include(c => c.Reviews).AsQueryable();
 
+            // Search for books by text that's partially contained in book's title
             if (!string.IsNullOrWhiteSpace(query.Title)) {
                 books = books.Where(b => b.Title.Contains(query.Title));
+            }
+            // Filter by author
+            if (!string.IsNullOrWhiteSpace(query.Author)) {
+                books = books.Where(b => b.Author.Contains(query.Author));
+            }
+            // Filter by availability
+            if (query.Availability.HasValue) {
+                books = books.Where(b => b.AvailableUntil < query.Availability);
+            }
+
+            // Sort by title
+            if(!string.IsNullOrWhiteSpace(query.SortBy)) {
+                if(query.SortBy.Equals("Title", StringComparison.OrdinalIgnoreCase)) {
+                    books = query.IsDescending ? books.OrderByDescending(b => b.Title) : books.OrderBy(b => b.Title);
+                }
+            }
+            // Sort by author
+            if(!string.IsNullOrWhiteSpace(query.SortBy)) {
+                if(query.SortBy.Equals("Author", StringComparison.OrdinalIgnoreCase)) {
+                    books = query.IsDescending ? books.OrderByDescending(b => b.Author) : books.OrderBy(b => b.Author);
+                }
+            }
+            // Sort by availability
+            if(!string.IsNullOrWhiteSpace(query.SortBy)) {
+                if(query.SortBy.Equals("Availability", StringComparison.OrdinalIgnoreCase)) {
+                    books = query.IsDescending ? books.OrderByDescending(b => b.AvailableUntil) : books.OrderBy(b => b.AvailableUntil);
+                }
             }
 
             return await books.ToListAsync();

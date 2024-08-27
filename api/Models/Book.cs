@@ -18,6 +18,7 @@ namespace api.Models
         public string Category { get; set; } = string.Empty;
         public long ISBN { get; set; }
         public int PageCount { get; set; }
+        public DateTime AvailableUntil { get; set; } = DateTime.Now;
         public List<Review> Reviews { get; set; } = new List<Review>();
     }
 }
