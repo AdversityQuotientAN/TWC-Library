@@ -7,6 +7,7 @@ using api.Dtos.Book;
 using api.Helpers;
 using api.Interfaces;
 using api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -119,6 +120,11 @@ namespace api.Repository
                 return null;
             }
 
+            // Check if book is available
+            if (bookModel.AvailableUntil > DateTime.Now) {
+                return null;
+            }
+
             bookModel.AvailableUntil = DateTime.Now.AddDays(5);
 
             await _context.SaveChangesAsync();
@@ -131,6 +137,11 @@ namespace api.Repository
             var bookModel = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
 
             if (bookModel == null) {
+                return null;
+            }
+
+            // Check if book is current being borrowed
+            if (bookModel.AvailableUntil < DateTime.Now) {
                 return null;
             }
 
