@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Book;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +25,11 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() {
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query) {
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var books = await _bookRepo.GetAllAsync();
+            var books = await _bookRepo.GetAllAsync(query);
 
             var bookDto = books.Select(s => s.ToBookDto());
 
