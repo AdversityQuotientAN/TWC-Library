@@ -88,6 +88,7 @@ builder.Services.AddAuthentication(options => {
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 
 // After this middleware (request pipeline), so ordering is crucial
 var app = builder.Build();  // app controls HTTP request pipeline
