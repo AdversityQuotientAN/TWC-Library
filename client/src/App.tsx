@@ -1,14 +1,15 @@
-// import { useState } from 'react'
 import './App.css'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { UserProvider } from './Context/useAuth'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
   return (
     <>
       <UserProvider>
+        <Outlet />
         <ToastContainer />
       </UserProvider>
     </>

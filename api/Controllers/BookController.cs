@@ -83,7 +83,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
 
         [HttpPut]
         [Route("checkout/{id:int}")]
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Checkout([FromRoute] int id) {
 
             if (!ModelState.IsValid) return BadRequest(ModelState);

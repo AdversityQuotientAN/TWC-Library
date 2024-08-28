@@ -34,7 +34,7 @@ namespace api.Controllers
 
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username.ToLower());
 
-            if (user == null) return Unauthorized("Invalid username!");
+            if (user == null) return Unauthorized("Username/password incorrect!");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
