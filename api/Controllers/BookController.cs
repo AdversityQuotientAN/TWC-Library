@@ -26,7 +26,6 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query) {
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -111,6 +110,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
 
         [HttpDelete]
         [Route("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id) {
             
             if (!ModelState.IsValid) return BadRequest(ModelState);
