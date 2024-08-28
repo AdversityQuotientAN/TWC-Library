@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240827200029_Identity")]
-    partial class Identity
+    [Migration("20240828041813_CollectionManyToMany")]
+    partial class CollectionManyToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,20 @@ namespace api.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6b101810-7e9f-4e4f-b9e0-7fdeaa0089e1",
+                            Name = "Librarian",
+                            NormalizedName = "LIBRARIAN"
+                        },
+                        new
+                        {
+                            Id = "1bc62316-9a53-4071-852a-49782cf0eae3",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -272,6 +286,21 @@ namespace api.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("api.Models.Collection", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Collections");
+                });
+
             modelBuilder.Entity("api.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -355,6 +384,25 @@ namespace api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("api.Models.Collection", b =>
+                {
+                    b.HasOne("api.Models.AppUser", "AppUser")
+                        .WithMany("Collections")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.Book", "Book")
+                        .WithMany("Collections")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Book");
+                });
+
             modelBuilder.Entity("api.Models.Review", b =>
                 {
                     b.HasOne("api.Models.Book", "Book")
@@ -364,8 +412,15 @@ namespace api.Migrations
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("api.Models.AppUser", b =>
+                {
+                    b.Navigation("Collections");
+                });
+
             modelBuilder.Entity("api.Models.Book", b =>
                 {
+                    b.Navigation("Collections");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

@@ -20,10 +20,26 @@ namespace api.Data
         // Links DB to actual code
         public DbSet<Book> Books { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Collection> Collections { get; set; }
 
         // Before we log anyone in, there has to be at least 1 role
         protected override void OnModelCreating(ModelBuilder builder) {
+
             base.OnModelCreating(builder);
+
+            // Foreign keys
+            builder.Entity<Collection>(x => x.HasKey(p => new { p.AppUserId, p.BookId }));
+
+            builder.Entity<Collection>()
+                .HasOne(u => u.AppUser)
+                .WithMany(u => u.Collections)
+                .HasForeignKey(p => p.AppUserId);
+
+            builder.Entity<Collection>()
+                .HasOne(u => u.Book)
+                .WithMany(u => u.Collections)
+                .HasForeignKey(p => p.BookId);
+            
             List<IdentityRole> roles = new List<IdentityRole> {
                 new IdentityRole {
                     Name = "Librarian",

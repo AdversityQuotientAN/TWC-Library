@@ -52,6 +52,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateBookRequestDto bookDto) { // Need 'FromBody' since data is sent as JSON
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -66,6 +67,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
 
         [HttpPut]
         [Route("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateBookRequestDto updateDto) {   // id from route, body from body
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -81,6 +83,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
 
         [HttpPut]
         [Route("checkout/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Checkout([FromRoute] int id) {
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -95,6 +98,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
         [HttpPut]
         [Route("return/{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Return([FromRoute] int id) {
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -109,8 +113,8 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
         [Authorize]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id) {
             
             if (!ModelState.IsValid) return BadRequest(ModelState);
