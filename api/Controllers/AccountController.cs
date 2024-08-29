@@ -44,6 +44,7 @@ namespace api.Controllers
                 new NewUserDto {
                     UserName = user.UserName,
                     Email = user.Email,
+                    UserType = user.UserType,
                     Token = _tokenService.CreateToken(user)
                 }
             );
@@ -57,19 +58,21 @@ namespace api.Controllers
 
                 var appUser = new AppUser {
                     UserName = registerDto.Username,
-                    Email = registerDto.Email
+                    Email = registerDto.Email,
+                    UserType = registerDto.UserType,
                 };
 
                 var createdUser = await _userManager.CreateAsync(appUser, registerDto.Password);
 
                 if (createdUser.Succeeded) {
-                    var roleResult = await _userManager.AddToRoleAsync(appUser, "Customer");
+                    var roleResult = await _userManager.AddToRoleAsync(appUser, registerDto.UserType);
 
                     if (roleResult.Succeeded) {
                         return Ok(
                             new NewUserDto {
                                 UserName = appUser.UserName,
                                 Email = appUser.Email,
+                                UserType = appUser.UserType,
                                 Token = _tokenService.CreateToken(appUser)
                             }
                         );
