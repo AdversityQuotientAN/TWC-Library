@@ -48,7 +48,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
                 return NotFound();
             }
             
-            return Ok(book.ToBookDto());
+            return Ok(book);
         }
 
         [HttpPost]

@@ -9,12 +9,14 @@ type RegisterFormInputs = {
     email: string
     userName: string
     password: string
+    usertype: string
 }
 
 const validation = Yup.object().shape({
     userName: Yup.string().required('Username is required'),
     password: Yup.string().required('Password is required'),
     email: Yup.string().required('Email is required'),
+    usertype: Yup.string().required().oneOf(['Librarian', 'Customer']),
 })
 
 const RegisterPage = () => {
@@ -23,7 +25,7 @@ const RegisterPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ resolver: yupResolver(validation) })
 
     const handleRegister = (form: RegisterFormInputs) => {
-        registerUser(form.email, form.userName, form.password)
+        registerUser(form.email, form.userName, form.password, form.usertype)
     }
 
     return (
@@ -47,6 +49,7 @@ const RegisterPage = () => {
                             id="email"
                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Email"
+                            defaultValue="user@example.com"
                             {...register('email')}
                         />
                         {errors.email ? <p className='text-white'>{errors.email.message}</p> : ''}
@@ -82,6 +85,22 @@ const RegisterPage = () => {
                         {...register('password')}
                         />
                         {errors.password ? <p className='text-white'>{errors.password.message}</p> : ''}
+                    </div>
+                    <div>
+                        <label
+                        htmlFor="usertype"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                        Customer/Librarian
+                        </label>
+                        <input
+                        type="usertype"
+                        id="usertype"
+                        placeholder="••••••••"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        {...register('usertype')}
+                        />
+                        {errors.usertype ? <p className='text-white'>{errors.usertype.message}</p> : ''}
                     </div>
                     <div className="flex items-center justify-between">
                         <a

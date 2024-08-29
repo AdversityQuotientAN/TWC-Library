@@ -49,7 +49,7 @@ export const UserProvider = ({ children }: Props) => {
                 localStorage.setItem('user', JSON.stringify(userObj))
                 setToken(response?.data.token!)
                 setUser(userObj!)
-                toast.success('Login success!')
+                toast.success('Registration success!')
                 navigate('/')
             }
         }).catch((e) => toast.warning('Server error occurred'))
