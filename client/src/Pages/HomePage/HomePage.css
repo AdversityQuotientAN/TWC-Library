@@ -1,0 +1,17 @@
+
+.bookContainer {
+    border: 2px solid gray;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 0.5rem;
+    height: 100%;
+}
+
+.bookSection {
+    max-height: 10rem;
+    display: flex;
+}
+
+.bookImage {
+    max-height: 20rem;
+}

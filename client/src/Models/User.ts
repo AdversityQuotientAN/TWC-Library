@@ -8,4 +8,5 @@ export type UserProfileToken = {
 export type UserProfile = {
     userName: string
     email: string
+    userType: string
 }
