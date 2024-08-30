@@ -10,14 +10,17 @@ const HomePage = () => {
 
   const [books, setBooks] = useState<Book[]>([])
   const [searchParams, setSearchParams] = useSearchParams()
+  const [loading, isLoading] = useState(true)
 
   const { user } = useAuth()
 
   const navigate = useNavigate()
 
   useEffect(() => {
+    isLoading(true)
     axios.get(`${api}book?${searchParams.toString()}`).then((response) => {
       setBooks(response.data)
+      isLoading(false)
     })
   }, [searchParams])
 
@@ -41,43 +44,44 @@ const HomePage = () => {
   return (
     <>
       <div>
-        Home Page
-        <form onSubmit={updateSearchParams}>
-          <label htmlFor='Title'>Title</label>
-          <input type='text' name='Title' id='Title'></input>
-          <button type='submit'>Search Title</button>
-        </form>
-        <form onSubmit={updateSearchParams}>
-          <label>Author</label>
-          <input type='text' name='Author' id='Author'></input>
-          <button type='submit'>Search Author</button>
-        </form>
-        <form onSubmit={updateSearchParams}>
-          <label>Available By</label>
-          <input type='date' name='Availability' id='Availability'></input>
-          <button type='submit'>Search Available By</button>
-        </form>
-        <form onSubmit={updateSearchParams}>
-          <label>Sort Field</label>
-          <select name='SortBy'>
-            <option value='Title'>Title</option>
-            <option value='Author'>Author</option>
-            <option value='Availability'>Availability</option>
-          </select>
-          <button type='submit'>Sort By Field</button>
-        </form>
-        <form onSubmit={updateSearchParams}>
-          <label>Is Descending</label>
-          <select name='IsDescending' id='IsDescending'>
-            <option value=''></option>
-            <option value='true'>True</option>
-            <option value='false'>False</option>
-          </select>
-          <button type='submit'>Is Descending</button>
-        </form>
-        <button onClick={clearFilters}>
-          Clear Filters
-        </button>
+        <div className='filterContainer'>
+          <form onSubmit={updateSearchParams}>
+            {/* <label htmlFor='Title'>Title</label> */}
+            <input className='input' type='text' name='Title' id='Title'></input>
+            <button type='submit'>Search Title</button>
+          </form>
+          <form onSubmit={updateSearchParams}>
+            {/* <label>Author</label> */}
+            <input className='input' type='text' name='Author' id='Author'></input>
+            <button type='submit'>Search Author</button>
+          </form>
+          <form onSubmit={updateSearchParams}>
+            {/* <label>Available By</label> */}
+            <input className='input' type='date' name='Availability' id='Availability'></input>
+            <button type='submit'>Search Available By</button>
+          </form>
+          <form onSubmit={updateSearchParams}>
+            {/* <label>Sort Field</label> */}
+            <select className='input' name='SortBy'>
+              <option value='Title'>Title</option>
+              <option value='Author'>Author</option>
+              <option value='Availability'>Availability</option>
+            </select>
+            <button type='submit'>Sort By Field</button>
+          </form>
+          <form onSubmit={updateSearchParams}>
+            {/* <label>Is Descending</label> */}
+            <select className='input' name='IsDescending' id='IsDescending'>
+              <option value=''></option>
+              <option value='true'>True</option>
+              <option value='false'>False</option>
+            </select>
+            <button type='submit'>Is Descending</button>
+          </form>
+          <button onClick={clearFilters}>
+            Clear Filters
+          </button>
+        </div>
         {user?.userType === 'Librarian' &&
           <div>
             <button onClick={() => navigate('/add')}>
@@ -86,7 +90,7 @@ const HomePage = () => {
           </div>
         }
         <div className='bookSection'>
-          {books.map((book) => {
+          {loading? 'Loading...' : books.map((book) => {
             return (
               <div className='bookContainer'>
                 <div onClick={() => {navigate(`/book/${book.id}`)}}>

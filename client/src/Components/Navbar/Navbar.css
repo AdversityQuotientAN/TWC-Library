@@ -1,0 +1,21 @@
+
+.navContainer {
+    width: 100%;
+    top: -10rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.itemsContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.loggingContainer {
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly;
+    align-items: center;
+}
