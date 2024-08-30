@@ -8,6 +8,9 @@ Librarians can view, add, return, edit, and delete books
 
 Frameworks: React (frontend), ASP.NET 8 Web API (backend)
 
+JWT used for authentication since it's flexible for API-based architectures
+
+
 
 Setup
 =====

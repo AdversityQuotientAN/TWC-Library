@@ -38,7 +38,7 @@ const BookPage = () => {
 
     const { id } = useParams()
 
-    const { user } = useAuth()
+    const { isLoggedIn, user } = useAuth()
 
     const navigate = useNavigate()
 
@@ -132,10 +132,10 @@ const BookPage = () => {
 
     return (
         <div className='bookPage'>
-            {loading ? 'Loading...' : 
+            {!isLoggedIn() ? 'Log in to view this book!' : loading ? 'Loading...' : 
                 <>
                     <div className='bookPageContainer'>
-                        <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt='Image not configured properly!' />
+                        <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
                         <div>Cover Image: {bookInfo?.coverImage}</div>
                         <div>Title: {bookInfo?.title}</div>
                         <div>Author: {bookInfo?.author}</div>

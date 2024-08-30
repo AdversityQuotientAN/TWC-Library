@@ -1,4 +1,12 @@
 
+
+.bookSection {
+    /* top: -6rem; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .bookContainer {
     border: 2px solid gray;
     border-radius: 0.5rem;
@@ -6,12 +14,6 @@
     padding: 0.5rem;
     height: 100%;
     max-width: 20rem;
-}
-
-.bookSection {
-    /* top: -6rem; */
-    display: flex;
-    justify-content: center;
 }
 
 .bookImage {

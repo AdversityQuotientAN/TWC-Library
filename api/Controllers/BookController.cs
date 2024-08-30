@@ -15,6 +15,7 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
 {
     [Route("api/book")]
     [ApiController]
+    [Authorize]
     public class BookController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -52,7 +53,6 @@ namespace api.Controllers   // Controllers are for manipulating the URLs, not fo
         }
 
         [HttpPost]
-        [Authorize]
         [Authorize(Roles = "Librarian")]
         public async Task<IActionResult> Create([FromBody] CreateBookRequestDto bookDto) { // Need 'FromBody' since data is sent as JSON
 

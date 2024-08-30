@@ -12,7 +12,7 @@ const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [loading, isLoading] = useState(true)
 
-  const { user } = useAuth()
+  const { isLoggedIn, user } = useAuth()
 
   const navigate = useNavigate()
 
@@ -43,7 +43,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div>
+      {isLoggedIn() ? <div>
         <div className='filterContainer'>
           <form onSubmit={updateSearchParams}>
             <input className='input' type='text' name='Title' id='Title'></input>
@@ -68,7 +68,6 @@ const HomePage = () => {
           </form>
           <form onSubmit={updateSearchParams}>
             <select className='input' name='IsDescending' id='IsDescending'>
-              <option value=''></option>
               <option value='true'>True</option>
               <option value='false'>False</option>
             </select>
@@ -90,7 +89,7 @@ const HomePage = () => {
             return (
               <div className='bookContainer'>
                 <div onClick={() => {navigate(`/book/${book.id}`)}}>
-                  <img className='bookImage' src={`images/${book.coverImage}`} alt='Image not configured properly!' />
+                  <img className='bookImage' src={`images/${book.coverImage}`} alt={book.coverImage} />
                 </div>
                 <div>{book.title}</div>
                 <div>{book.author}</div>
@@ -99,7 +98,7 @@ const HomePage = () => {
             )
           })}
         </div>
-      </div>
+      </div> : 'The library. Log in to view books!'}
     </>
   )
 }
