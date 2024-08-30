@@ -1,30 +1,83 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Book } from '../../Models/Book'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import './HomePage.css'
 import { useAuth } from '../../Context/useAuth'
-
-const api = 'http://localhost:5035/api/book'
+import { api } from '../../constants'
 
 const HomePage = () => {
 
   const [books, setBooks] = useState<Book[]>([])
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const { user } = useAuth()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    axios.get(api).then((response) => {
+    axios.get(`${api}book?${searchParams.toString()}`).then((response) => {
       setBooks(response.data)
     })
-  }, [])
+  }, [searchParams])
+
+  const updateSearchParams = (e) => {
+    e.preventDefault()
+    const form = e.target
+    const field = form.elements[0].name
+    const value = form.elements[0].value
+    setSearchParams(prev => {
+      const newParams = new URLSearchParams(prev)
+      newParams.set(field, value)
+      return newParams
+    })
+    console.log(searchParams.toString())
+  }
+
+  const clearFilters = () => {
+    setSearchParams(new URLSearchParams())
+  }
 
   return (
     <>
       <div>
         Home Page
+        <form onSubmit={updateSearchParams}>
+          <label htmlFor='Title'>Title</label>
+          <input type='text' name='Title' id='Title'></input>
+          <button type='submit'>Search Title</button>
+        </form>
+        <form onSubmit={updateSearchParams}>
+          <label>Author</label>
+          <input type='text' name='Author' id='Author'></input>
+          <button type='submit'>Search Author</button>
+        </form>
+        <form onSubmit={updateSearchParams}>
+          <label>Available By</label>
+          <input type='date' name='Availability' id='Availability'></input>
+          <button type='submit'>Search Available By</button>
+        </form>
+        <form onSubmit={updateSearchParams}>
+          <label>Sort Field</label>
+          <select name='SortBy'>
+            <option value='Title'>Title</option>
+            <option value='Author'>Author</option>
+            <option value='Availability'>Availability</option>
+          </select>
+          <button type='submit'>Sort By Field</button>
+        </form>
+        <form onSubmit={updateSearchParams}>
+          <label>Is Descending</label>
+          <select name='IsDescending' id='IsDescending'>
+            <option value=''></option>
+            <option value='true'>True</option>
+            <option value='false'>False</option>
+          </select>
+          <button type='submit'>Is Descending</button>
+        </form>
+        <button onClick={clearFilters}>
+          Clear Filters
+        </button>
         {user?.userType === 'Librarian' &&
           <div>
             <button onClick={() => navigate('/add')}>

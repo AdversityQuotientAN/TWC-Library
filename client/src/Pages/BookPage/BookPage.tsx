@@ -36,7 +36,7 @@ const BookPage = () => {
                 toast.warning('Book is unavailable!')
             }
             else {
-                toast.warning("Other error!")
+                toast.warning(`Other error: ${e.message}`)
             }
         })
     }
@@ -79,7 +79,7 @@ const BookPage = () => {
                         <div>Category: {bookInfo?.category}</div>
                         <div>ISBN: {bookInfo?.isbn}</div>
                         <div>Page Count: {bookInfo?.pageCount}</div>
-                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).getTime() : 'Now'}
+                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toISOString() : 'Now'}
                     </div>
                     <div>
                         {(user?.userType === 'Customer') &&
