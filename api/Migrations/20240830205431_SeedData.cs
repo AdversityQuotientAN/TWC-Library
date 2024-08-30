@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class CollectionManyToMany : Migration
+    public partial class SeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,7 @@ namespace api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -231,8 +232,17 @@ namespace api.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1bc62316-9a53-4071-852a-49782cf0eae3", null, "Customer", "CUSTOMER" },
-                    { "6b101810-7e9f-4e4f-b9e0-7fdeaa0089e1", null, "Librarian", "LIBRARIAN" }
+                    { "6f34457e-e406-4545-aa0b-f5025b756ed2", null, "Librarian", "LIBRARIAN" },
+                    { "f8f03419-f927-4fb2-af97-1721624049cd", null, "Customer", "CUSTOMER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Author", "AvailableUntil", "Category", "CoverImage", "Description", "ISBN", "PageCount", "PublicationDate", "Publisher", "Title" },
+                values: new object[,]
+                {
+                    { -2, "Suzanne Collins", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dystopian", "HungerGames.png", "A twisted battle royale for entertainment", 9780439023481L, 384, new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Scholastic Press", "The Hunger Games" },
+                    { -1, "F. Scott Fitzgerald", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Realism", "Gatsby.png", "A mysterious millionaire who wants to reunite with his former lover", 9780743273565L, 180, new DateTime(1925, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Charles Scribner's Sons", "The Great Gatsby" }
                 });
 
             migrationBuilder.CreateIndex(

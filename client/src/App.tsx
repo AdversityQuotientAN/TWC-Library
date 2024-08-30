@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { UserProvider } from './Context/useAuth'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
+import Footer from './Components/Footer/Footer'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Navbar />
         <Outlet />
         <ToastContainer />
+        <Footer />
       </UserProvider>
     </>
   )

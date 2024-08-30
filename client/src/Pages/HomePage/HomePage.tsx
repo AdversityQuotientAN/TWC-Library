@@ -46,23 +46,20 @@ const HomePage = () => {
       <div>
         <div className='filterContainer'>
           <form onSubmit={updateSearchParams}>
-            {/* <label htmlFor='Title'>Title</label> */}
             <input className='input' type='text' name='Title' id='Title'></input>
             <button type='submit'>Search Title</button>
           </form>
           <form onSubmit={updateSearchParams}>
-            {/* <label>Author</label> */}
             <input className='input' type='text' name='Author' id='Author'></input>
             <button type='submit'>Search Author</button>
           </form>
           <form onSubmit={updateSearchParams}>
-            {/* <label>Available By</label> */}
             <input className='input' type='date' name='Availability' id='Availability'></input>
             <button type='submit'>Search Available By</button>
           </form>
           <form onSubmit={updateSearchParams}>
-            {/* <label>Sort Field</label> */}
             <select className='input' name='SortBy'>
+              <option value=''></option>
               <option value='Title'>Title</option>
               <option value='Author'>Author</option>
               <option value='Availability'>Availability</option>
@@ -70,7 +67,6 @@ const HomePage = () => {
             <button type='submit'>Sort By Field</button>
           </form>
           <form onSubmit={updateSearchParams}>
-            {/* <label>Is Descending</label> */}
             <select className='input' name='IsDescending' id='IsDescending'>
               <option value=''></option>
               <option value='true'>True</option>

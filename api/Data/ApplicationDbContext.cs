@@ -40,6 +40,7 @@ namespace api.Data
                 .WithMany(u => u.Collections)
                 .HasForeignKey(p => p.BookId);
             
+            // Seed roles
             List<IdentityRole> roles = new List<IdentityRole> {
                 new IdentityRole {
                     Name = "Librarian",
@@ -51,6 +52,37 @@ namespace api.Data
                 }
             };
             builder.Entity<IdentityRole>().HasData(roles);
+
+            // Seed books
+            List<Book> books = new List<Book> {
+                new Book {
+                    Id = -2,
+                    Title = "The Great Gatsby",
+                    Author = "F. Scott Fitzgerald",
+                    Description = "A mysterious millionaire who wants to reunite with his former lover",
+                    CoverImage = "Gatsby.png",
+                    Publisher = "Charles Scribner's Sons",
+                    PublicationDate = new DateTime(1925, 4, 10),
+                    Category = "Realism",
+                    ISBN = 9780743273565,
+                    PageCount = 180,
+                    AvailableUntil = new DateTime()
+                },
+                new Book {
+                    Id = -1,
+                    Title = "The Hunger Games",
+                    Author = "Suzanne Collins",
+                    Description = "A twisted battle royale for entertainment",
+                    CoverImage = "HungerGames.png",
+                    Publisher = "Scholastic Press",
+                    PublicationDate = new DateTime(2008, 9, 14),
+                    Category = "Dystopian",
+                    ISBN = 9780439023481,
+                    PageCount = 384,
+                    AvailableUntil = new DateTime()
+                }
+            };
+            builder.Entity<Book>().HasData(books);
         }
     }
 }

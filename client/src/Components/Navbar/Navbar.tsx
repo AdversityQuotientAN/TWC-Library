@@ -8,29 +8,29 @@ const Navbar = () => {
     const { isLoggedIn, user, logout } = useAuth()
   
     return (
-        <nav className="relative container mx-auto p-6 navContainer">
-          <div className="flex items-center justify-between itemsContainer">
+        <nav className="navContainer">
+          <div className="itemsContainer">
             <Link to="/">
-              <h3>Home</h3>
+              <h3 style={{ 'margin-left': '1rem' }}>Home</h3>
             </Link>
             {isLoggedIn() ? (
-              <div className="hidden lg:flex items-center space-x-6 text-back">
-                <div className="hover:text-darkBlue">Welcome, {user?.userType} {user?.userName}</div>
+              <div className="">
+                <div className="">Welcome, {user?.userType} {user?.userName}</div>
                 <a
                   onClick={logout}
-                  className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
+                  className=""
                 >
                   Logout
                 </a>
               </div>
             ) : (
-              <div className="hidden lg:flex items-center space-x-6 text-back loggingContainer">
+              <div className="loggingContainer">
                 <Link to="/login" className="hover:text-darkBlue">
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70"
+                  className=""
                 >
                   Signup
                 </Link>

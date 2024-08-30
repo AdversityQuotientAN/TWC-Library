@@ -17,7 +17,7 @@ namespace api.Repository
         private readonly ApplicationDbContext _context;
         public BookRepository(ApplicationDbContext context) // Brings in database before using it
         {
-            _context = context;   
+            _context = context;
         }
 
         public Task<bool> BookExists(int id)

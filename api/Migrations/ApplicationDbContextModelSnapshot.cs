@@ -51,13 +51,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6b101810-7e9f-4e4f-b9e0-7fdeaa0089e1",
+                            Id = "6f34457e-e406-4545-aa0b-f5025b756ed2",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
-                            Id = "1bc62316-9a53-4071-852a-49782cf0eae3",
+                            Id = "f8f03419-f927-4fb2-af97-1721624049cd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -221,6 +221,9 @@ namespace api.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("UserType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -281,6 +284,36 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Author = "F. Scott Fitzgerald",
+                            AvailableUntil = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Category = "Realism",
+                            CoverImage = "Gatsby.png",
+                            Description = "A mysterious millionaire who wants to reunite with his former lover",
+                            ISBN = 9780743273565L,
+                            PageCount = 180,
+                            PublicationDate = new DateTime(1925, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Publisher = "Charles Scribner's Sons",
+                            Title = "The Great Gatsby"
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Author = "Suzanne Collins",
+                            AvailableUntil = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Category = "Dystopian",
+                            CoverImage = "HungerGames.png",
+                            Description = "A twisted battle royale for entertainment",
+                            ISBN = 9780439023481L,
+                            PageCount = 384,
+                            PublicationDate = new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Publisher = "Scholastic Press",
+                            Title = "The Hunger Games"
+                        });
                 });
 
             modelBuilder.Entity("api.Models.Collection", b =>

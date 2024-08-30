@@ -5,6 +5,7 @@ import { api } from '../../constants'
 import { Book } from '../../Models/Book'
 import { useAuth } from '../../Context/useAuth'
 import { toast } from 'react-toastify'
+import './BookPage.css'
 
 const BookPage = () => {
 
@@ -65,10 +66,10 @@ const BookPage = () => {
     }
 
     return (
-        <>
+        <div className='bookPage'>
             {loading ? 'Loading...' : 
                 <>
-                    <div>
+                    <div className='bookPageContainer'>
                         <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt='Image not configured properly!' />
                         <div>Cover Image: {bookInfo?.coverImage}</div>
                         <div>Title: {bookInfo?.title}</div>
@@ -105,7 +106,7 @@ const BookPage = () => {
                     </div>
                 </>
             }
-        </>
+        </div>
     )
 }
 
