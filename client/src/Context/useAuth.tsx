@@ -51,6 +51,7 @@ export const UserProvider = ({ children }: Props) => {
                 setUser(userObj!)
                 toast.success('Registration success!')
                 navigate('/')
+                window.location.reload()
             }
         }).catch((e) => toast.warning('Server error occurred'))
     }
@@ -70,6 +71,7 @@ export const UserProvider = ({ children }: Props) => {
                 setUser(userObj!)
                 toast.success('Login success!')
                 navigate('/')
+                window.location.reload()
             }
         }).catch((e) => toast.warning('Server error occurred'))
     }

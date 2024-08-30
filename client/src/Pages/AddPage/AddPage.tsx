@@ -46,7 +46,7 @@ const AddPage = () => {
             title: form.title,
             author: form.author,
             description: form.description,
-            coverImage: "temp",
+            coverImage: form.coverImage,
             publisher: form.publisher,
             publicationDate: form.publicationDate,
             category: form.category,

@@ -7,10 +7,13 @@
     width: 1280px;
     margin-bottom: 5rem;
     margin-top: 5rem;
+    flex-direction: column;
 }
 
 .bookPageContainer {
     justify-content: center;
     text-align: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }

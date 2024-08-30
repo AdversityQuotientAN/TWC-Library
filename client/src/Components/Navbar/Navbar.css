@@ -2,10 +2,12 @@
 .navContainer {
     width: 100%;
     top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     position: fixed;
     z-index: 100;
+    background-color: black;
 }
 
 .itemsContainer {
@@ -19,4 +21,11 @@
     width: 20%;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.userContainer {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    justify-content: space-evenly;
 }

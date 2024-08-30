@@ -14,7 +14,7 @@ const Navbar = () => {
               <h3 style={{ 'margin-left': '1rem' }}>Home</h3>
             </Link>
             {isLoggedIn() ? (
-              <div className="">
+              <div className="userContainer">
                 <div className="">Welcome, {user?.userType} {user?.userName}</div>
                 <a
                   onClick={logout}
