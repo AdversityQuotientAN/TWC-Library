@@ -46,13 +46,21 @@ const BookPage = () => {
             toast.success(`Successfully returned ${bookInfo?.title}!`)
             navigate('/')
         }).catch((e) => {
-            console.log(e)
             if (e.status == 404) {
-                toast.warning('Book is not being borrowed!')
+                toast.warning('Book is currently not being borrowed!')
             }
             else {
-                toast.warning("Other error!")
+                toast.warning(`Other error: ${e.message}`)
             }
+        })
+    }
+
+    const deleteBook = () => {
+        axios.delete(`${api}book/${id}`).then(() => {
+            toast.success(`Successfully deleted book!`)
+            navigate('/')
+        }).catch((e) => {
+            toast.warning(`Other error: ${e.message}`)
         })
     }
 
@@ -71,7 +79,7 @@ const BookPage = () => {
                         <div>Category: {bookInfo?.category}</div>
                         <div>ISBN: {bookInfo?.isbn}</div>
                         <div>Page Count: {bookInfo?.pageCount}</div>
-                        {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? 'Unavailable' : 'Available'}
+                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).getTime() : 'Now'}
                     </div>
                     <div>
                         {(user?.userType === 'Customer') &&
@@ -83,11 +91,15 @@ const BookPage = () => {
                         }
                         {(user?.userType === "Librarian") &&
                             <div>
-                                <button onClick={returnBook} disabled={new Date(bookInfo?.availableUntil).getTime() > Date.now()}>
+                                <button onClick={returnBook} disabled={new Date(bookInfo?.availableUntil).getTime() < Date.now()}>
                                     Return
                                 </button>
-                                Edit
-                                Delete
+                                <button>
+                                    Edit
+                                </button>
+                                <button onClick={deleteBook}>
+                                    Delete
+                                </button>
                             </div>
                         }
                     </div>

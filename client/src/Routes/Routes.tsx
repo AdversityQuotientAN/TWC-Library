@@ -5,6 +5,7 @@ import HomePage from "../Pages/HomePage/HomePage";
 import RegisterPage from "../Pages/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
 import BookPage from "../Pages/BookPage/BookPage";
+import AddPage from "../Pages/AddPage/AddPage";
 
 
 export const router = createBrowserRouter([
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
             { path: 'edit', element: <ProtectedRoute><RegisterPage /></ProtectedRoute> },
             { path: 'delete', element: <ProtectedRoute><RegisterPage /></ProtectedRoute> },
             { path: 'book/:id', element: <BookPage /> },
+            { path: 'add', element: <AddPage /> },
         ]
     }
 ])

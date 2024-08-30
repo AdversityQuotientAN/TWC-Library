@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { Book } from '../../Models/Book'
 import { useNavigate } from 'react-router-dom'
 import './HomePage.css'
+import { useAuth } from '../../Context/useAuth'
 
 const api = 'http://localhost:5035/api/book'
 
 const HomePage = () => {
 
   const [books, setBooks] = useState<Book[]>([])
+
+  const { user } = useAuth()
 
   const navigate = useNavigate()
 
@@ -22,6 +25,13 @@ const HomePage = () => {
     <>
       <div>
         Home Page
+        {user?.userType === 'Librarian' &&
+          <div>
+            <button onClick={() => navigate('/add')}>
+              Add Book
+            </button>
+          </div>
+        }
         <div className='bookSection'>
           {books.map((book) => {
             return (
