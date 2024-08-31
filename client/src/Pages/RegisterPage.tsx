@@ -54,6 +54,7 @@ const RegisterPage = () => {
                         />
                         {errors.email ? <p className='text-white'>{errors.email.message}</p> : ''}
                     </div>
+                    <br />
                     <div>
                         <label
                         htmlFor="username"
@@ -70,6 +71,7 @@ const RegisterPage = () => {
                         />
                         {errors.userName ? <p className='text-white'>{errors.userName.message}</p> : ''}
                     </div>
+                    <br />
                     <div>
                         <label
                         htmlFor="password"
@@ -86,6 +88,7 @@ const RegisterPage = () => {
                         />
                         {errors.password ? <p className='text-white'>{errors.password.message}</p> : ''}
                     </div>
+                    <br />
                     <div>
                         <label
                         htmlFor="usertype"
@@ -110,20 +113,24 @@ const RegisterPage = () => {
                         />
                         {errors.usertype ? <p className='text-white'>{errors.usertype.message}</p> : ''}
                     </div>
-                    <div className="flex items-center justify-between">
+                    <br />
+                    {/* <div className="flex items-center justify-between">
                         <a
                         href="#"
                         className=""
                         >
                         Forgot password?
                         </a>
-                    </div>
+                    </div> */}
+                    <br />
                     <button
                         type="submit"
                         className=""
                     >
                         Sign up
                     </button>
+                    <br />
+                    <br />
                     </form>
                 </div>
                 </div>

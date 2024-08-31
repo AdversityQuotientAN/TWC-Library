@@ -136,16 +136,28 @@ const BookPage = () => {
                 <>
                     <div className='bookPageContainer'>
                         <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
+                        <br />
                         <div>Cover Image: {bookInfo?.coverImage}</div>
+                        <br />
                         <div>Title: {bookInfo?.title}</div>
+                        <br />
                         <div>Author: {bookInfo?.author}</div>
+                        <br />
                         <div>Description: {bookInfo?.description}</div>
+                        <br />
                         <div>Publisher: {bookInfo?.publisher}</div>
+                        <br />
                         <div>Publication Date: {bookInfo?.publicationDate.toString()}</div>
+                        <br />
                         <div>Category: {bookInfo?.category}</div>
+                        <br />
                         <div>ISBN: {bookInfo?.isbn}</div>
+                        <br />
                         <div>Page Count: {bookInfo?.pageCount}</div>
+                        <br />
                         Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toISOString() : 'Now'}
+                        <br />
+                        <br />
                     </div>
                     <div>
                         {(user?.userType === 'Customer') &&
@@ -188,6 +200,7 @@ const BookPage = () => {
                                 />
                                 {errors.title ? <p className='text-white'>{errors.title.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='author'
@@ -204,6 +217,7 @@ const BookPage = () => {
                                 />
                                 {errors.author ? <p className='text-white'>{errors.author.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='description'
@@ -220,6 +234,7 @@ const BookPage = () => {
                                 />
                                 {errors.description ? <p className='text-white'>{errors.description.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='coverImage'
@@ -236,6 +251,7 @@ const BookPage = () => {
                                 />
                                 {errors.coverImage ? <p className='text-white'>{errors.coverImage.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='publisher'
@@ -252,6 +268,7 @@ const BookPage = () => {
                                 />
                                 {errors.publisher ? <p className='text-white'>{errors.publisher.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='publicationDate'
@@ -268,6 +285,7 @@ const BookPage = () => {
                                 />
                                 {errors.publicationDate ? <p className='text-white'>{errors.publicationDate.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='category'
@@ -284,6 +302,7 @@ const BookPage = () => {
                                 />
                                 {errors.category ? <p className='text-white'>{errors.category.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='isbn'
@@ -300,6 +319,7 @@ const BookPage = () => {
                                 />
                                 {errors.isbn ? <p className='text-white'>{errors.isbn.message}</p> : ''}
                             </div>
+                            <br />
                             <div>
                                 <label
                                     htmlFor='pageCount'
@@ -316,6 +336,7 @@ const BookPage = () => {
                                 />
                                 {errors.pageCount ? <p className='text-white'>{errors.pageCount.message}</p> : ''}
                             </div>
+                            <br />
 
                             <button type='submit'>Update book</button>
                         </form>

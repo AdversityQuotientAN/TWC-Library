@@ -99,6 +99,8 @@ const HomePage = () => {
           })}
         </div>
       </div> : 'The library. Log in to view books!'}
+      <br />
+      <br />
     </>
   )
 }
