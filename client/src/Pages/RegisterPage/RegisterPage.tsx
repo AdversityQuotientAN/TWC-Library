@@ -2,7 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useAuth } from '../Context/useAuth'
+import { useAuth } from '../../Context/useAuth'
 
 
 type RegisterFormInputs = {
@@ -42,7 +42,7 @@ const RegisterPage = () => {
                         htmlFor="email"
                         className=""
                         >
-                        Email
+                        Email:{' '}
                         </label>
                         <input
                             type="text"
@@ -60,7 +60,7 @@ const RegisterPage = () => {
                         htmlFor="username"
                         className=""
                         >
-                        Username
+                        Username:{' '}
                         </label>
                         <input
                             type="text"
@@ -77,7 +77,7 @@ const RegisterPage = () => {
                         htmlFor="password"
                         className=""
                         >
-                        Password
+                        Password:{' '}
                         </label>
                         <input
                         type="password"
@@ -103,7 +103,7 @@ const RegisterPage = () => {
                             className=""
                             {...register('usertype')}
                         />
-                        Librarian:
+                        {' '}Librarian:
                         <input
                             type="radio"
                             id="usertype"

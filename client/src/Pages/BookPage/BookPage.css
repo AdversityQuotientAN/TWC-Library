@@ -16,3 +16,19 @@
     display: flex;
     flex-direction: column;
 }
+
+.bookImage {
+    margin-bottom: 1rem;
+}
+
+.attribute {
+    margin-bottom: 1rem;
+}
+
+.actionsContainer button {
+    margin: 1rem;
+}
+
+.editContainer input {
+    margin: 1rem;
+}

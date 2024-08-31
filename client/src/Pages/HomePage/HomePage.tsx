@@ -79,7 +79,7 @@ const HomePage = () => {
         </div>
         {user?.userType === 'Librarian' &&
           <div>
-            <button onClick={() => navigate('/add')}>
+            <button onClick={() => navigate('/add')} className='addButton'>
               Add Book
             </button>
           </div>

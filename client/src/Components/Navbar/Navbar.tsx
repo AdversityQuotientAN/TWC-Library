@@ -18,19 +18,19 @@ const Navbar = () => {
                 <div className="">Welcome, {user?.userType} {user?.userName}</div>
                 <a
                   onClick={logout}
-                  className=""
+                  className="link"
                 >
                   Logout
                 </a>
               </div>
             ) : (
               <div className="loggingContainer">
-                <Link to="/login" className="hover:text-darkBlue">
+                <Link to="/login" className="link">
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className=""
+                  className="link"
                 >
                   Signup
                 </Link>

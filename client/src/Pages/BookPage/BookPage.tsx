@@ -136,30 +136,18 @@ const BookPage = () => {
                 <>
                     <div className='bookPageContainer'>
                         <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
-                        <br />
-                        <div>Cover Image: {bookInfo?.coverImage}</div>
-                        <br />
-                        <div>Title: {bookInfo?.title}</div>
-                        <br />
-                        <div>Author: {bookInfo?.author}</div>
-                        <br />
-                        <div>Description: {bookInfo?.description}</div>
-                        <br />
-                        <div>Publisher: {bookInfo?.publisher}</div>
-                        <br />
-                        <div>Publication Date: {bookInfo?.publicationDate.toString()}</div>
-                        <br />
-                        <div>Category: {bookInfo?.category}</div>
-                        <br />
-                        <div>ISBN: {bookInfo?.isbn}</div>
-                        <br />
-                        <div>Page Count: {bookInfo?.pageCount}</div>
-                        <br />
-                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toISOString() : 'Now'}
-                        <br />
-                        <br />
+                        {/* <div className='attribute'>Cover Image: {bookInfo?.coverImage}</div> */}
+                        <div className='attribute'>Title: {bookInfo?.title}</div>
+                        <div className='attribute'>Author: {bookInfo?.author}</div>
+                        <div className='attribute'>Description: {bookInfo?.description}</div>
+                        <div className='attribute'>Publisher: {bookInfo?.publisher}</div>
+                        <div className='attribute'>Publication Date: {bookInfo?.publicationDate.toString()}</div>
+                        <div className='attribute'>Category: {bookInfo?.category}</div>
+                        <div className='attribute'>ISBN: {bookInfo?.isbn}</div>
+                        <div className='attribute'>Page Count: {bookInfo?.pageCount}</div>
+                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
                     </div>
-                    <div>
+                    <div className='actionsContainer'>
                         {(user?.userType === 'Customer') &&
                             <div>
                                 <button onClick={checkOut} disabled={new Date(bookInfo?.availableUntil).getTime() > Date.now()}>
@@ -182,13 +170,13 @@ const BookPage = () => {
                         }
                     </div>
                     {editMode && 
-                    <div>
+                    <div className='editContainer'>
                         <form onSubmit={handleSubmit(EditBook)}>
                             <div>
                                 <label
                                     htmlFor='title'
                                 >
-                                    Title
+                                    Title:
                                 </label>
                                 <input
                                     type='text'
@@ -200,12 +188,11 @@ const BookPage = () => {
                                 />
                                 {errors.title ? <p className='text-white'>{errors.title.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='author'
                                 >
-                                    Author
+                                    Author:
                                 </label>
                                 <input
                                     type='text'
@@ -217,12 +204,11 @@ const BookPage = () => {
                                 />
                                 {errors.author ? <p className='text-white'>{errors.author.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='description'
                                 >
-                                    Description
+                                    Description:
                                 </label>
                                 <input
                                     type='text'
@@ -234,12 +220,11 @@ const BookPage = () => {
                                 />
                                 {errors.description ? <p className='text-white'>{errors.description.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='coverImage'
                                 >
-                                    Cover Image
+                                    Cover Image:
                                 </label>
                                 <input
                                     type='text'
@@ -251,12 +236,11 @@ const BookPage = () => {
                                 />
                                 {errors.coverImage ? <p className='text-white'>{errors.coverImage.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='publisher'
                                 >
-                                    Publisher
+                                    Publisher:
                                 </label>
                                 <input
                                     type='text'
@@ -268,12 +252,11 @@ const BookPage = () => {
                                 />
                                 {errors.publisher ? <p className='text-white'>{errors.publisher.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='publicationDate'
                                 >
-                                    Publication Date
+                                    Publication Date:
                                 </label>
                                 <input
                                     type='date'
@@ -285,12 +268,11 @@ const BookPage = () => {
                                 />
                                 {errors.publicationDate ? <p className='text-white'>{errors.publicationDate.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='category'
                                 >
-                                    Category
+                                    Category:
                                 </label>
                                 <input
                                     type='text'
@@ -302,12 +284,11 @@ const BookPage = () => {
                                 />
                                 {errors.category ? <p className='text-white'>{errors.category.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='isbn'
                                 >
-                                    ISBN
+                                    ISBN:
                                 </label>
                                 <input
                                     type='number'
@@ -319,12 +300,11 @@ const BookPage = () => {
                                 />
                                 {errors.isbn ? <p className='text-white'>{errors.isbn.message}</p> : ''}
                             </div>
-                            <br />
                             <div>
                                 <label
                                     htmlFor='pageCount'
                                 >
-                                    Page Count
+                                    Page Count:
                                 </label>
                                 <input
                                     type='number'
@@ -336,7 +316,6 @@ const BookPage = () => {
                                 />
                                 {errors.pageCount ? <p className='text-white'>{errors.pageCount.message}</p> : ''}
                             </div>
-                            <br />
 
                             <button type='submit'>Update book</button>
                         </form>
