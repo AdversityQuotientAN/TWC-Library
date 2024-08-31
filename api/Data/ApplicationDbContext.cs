@@ -6,6 +6,7 @@ using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Bogus;
 
 namespace api.Data
 {
@@ -21,6 +22,23 @@ namespace api.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Collection> Collections { get; set; }
+
+        public static List<Book> GetRandomBooks(int numBooks) {
+            var faker = new Faker<Book>()
+                .RuleFor(b => b.Id, f => f.IndexFaker + 1)
+                .RuleFor(b => b.Title, f => String.Join(" ", f.Lorem.Words()))
+                .RuleFor(b => b.Author, f => f.Name.FullName())
+                .RuleFor(b => b.Description, f => String.Join(" ", f.Random.Words()))
+                .RuleFor(b => b.CoverImage, f => f.Image.ToString())
+                .RuleFor(b => b.Publisher, f => f.Company.CompanyName())
+                .RuleFor(b => b.PublicationDate, f => f.Date.Past(100))
+                .RuleFor(b => b.Category, f => f.Lorem.Word())
+                .RuleFor(b => b.ISBN, f => f.Random.Int())
+                .RuleFor(b => b.PageCount, f => f.Random.Int())
+                .RuleFor(b => b.AvailableUntil, f => f.Date.Past(5));
+            var books = faker.Generate(numBooks);
+            return books;
+        }
 
         // Before we log anyone in, there has to be at least 1 role
         protected override void OnModelCreating(ModelBuilder builder) {
@@ -54,7 +72,7 @@ namespace api.Data
             builder.Entity<IdentityRole>().HasData(roles);
 
             // Seed books
-            List<Book> books = new List<Book> {
+            List<Book> books = [
                 new Book {
                     Id = -2,
                     Title = "The Great Gatsby",
@@ -80,8 +98,9 @@ namespace api.Data
                     ISBN = 9780439023481,
                     PageCount = 384,
                     AvailableUntil = new DateTime()
-                }
-            };
+                },
+                .. GetRandomBooks(4),
+            ];
             builder.Entity<Book>().HasData(books);
         }
     }

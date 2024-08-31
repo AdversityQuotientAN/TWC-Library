@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Ji3j8FyoKkg=",
+  "dgSpecHash": "R5HV3y1SsfU=",
   "success": true,
   "projectFilePath": "C:\\Albert\\Library\\api\\api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alber\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\alber\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\alber\\.nuget\\packages\\bogus\\35.6.0\\bogus.35.6.0.nupkg.sha512",
     "C:\\Users\\alber\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\alber\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "C:\\Users\\alber\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",
