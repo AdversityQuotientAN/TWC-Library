@@ -68,10 +68,10 @@ const HomePage = () => {
           </form>
           <form onSubmit={updateSearchParams}>
             <select className='input' name='IsDescending' id='IsDescending'>
-              <option value='true'>True</option>
-              <option value='false'>False</option>
+              <option value='false'>Ascending</option>
+              <option value='true'>Descending</option>
             </select>
-            <button type='submit'>Is Descending</button>
+            <button type='submit'>Order</button>
           </form>
           <button onClick={clearFilters}>
             Clear Filters
@@ -87,8 +87,8 @@ const HomePage = () => {
         <div className='bookSection'>
           {loading? 'Loading...' : books.map((book) => {
             return (
-              <div className='bookContainer'>
-                <div onClick={() => {navigate(`/book/${book.id}`)}}>
+              <div className='bookContainer' onClick={() => {navigate(`/book/${book.id}`)}}>
+                <div>
                   <img className='bookImage' src={`images/${book.coverImage}`} alt={book.coverImage} />
                 </div>
                 <div>{book.title}</div>

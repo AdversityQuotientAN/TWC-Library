@@ -30,6 +30,17 @@
     justify-content: space-evenly;
 }
 
+.userContainer a {
+    background-color: black;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all ease 0.2s;
+}
+
+.userContainer a:hover {
+    background-color: white;
+}
+
 .link {
     cursor: pointer;
 }

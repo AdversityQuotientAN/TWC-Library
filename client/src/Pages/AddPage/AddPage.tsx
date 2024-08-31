@@ -7,6 +7,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../constants'
+import './AddPage.css'
 
 type AddBookFormInputs = {
     title: string
@@ -71,11 +72,11 @@ const AddPage = () => {
             <div>
                 <h1>Add Book</h1>
                 <form onSubmit={handleSubmit(AddBook)}>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='title'
                         >
-                            Title
+                            Title:
                         </label>
                         <input
                             type='text'
@@ -85,11 +86,11 @@ const AddPage = () => {
                         />
                         {errors.title ? <p className='text-white'>{errors.title.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='author'
                         >
-                            Author
+                            Author:
                         </label>
                         <input
                             type='text'
@@ -98,11 +99,11 @@ const AddPage = () => {
                         />
                         {errors.author ? <p className='text-white'>{errors.author.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='description'
                         >
-                            Description
+                            Description:
                         </label>
                         <input
                             type='text'
@@ -111,11 +112,11 @@ const AddPage = () => {
                         />
                         {errors.description ? <p className='text-white'>{errors.description.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='coverImage'
                         >
-                            Cover Image
+                            Cover Image:
                         </label>
                         <input
                             type='text'
@@ -125,11 +126,11 @@ const AddPage = () => {
                         />
                         {errors.coverImage ? <p className='text-white'>{errors.coverImage.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='publisher'
                         >
-                            Publisher
+                            Publisher:
                         </label>
                         <input
                             type='text'
@@ -138,11 +139,11 @@ const AddPage = () => {
                         />
                         {errors.publisher ? <p className='text-white'>{errors.publisher.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='publicationDate'
                         >
-                            Publication Date
+                            Publication Date:
                         </label>
                         <input
                             type='date'
@@ -151,11 +152,11 @@ const AddPage = () => {
                         />
                         {errors.publicationDate ? <p className='text-white'>{errors.publicationDate.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='category'
                         >
-                            Category
+                            Category:
                         </label>
                         <input
                             type='text'
@@ -164,11 +165,11 @@ const AddPage = () => {
                         />
                         {errors.category ? <p className='text-white'>{errors.category.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='isbn'
                         >
-                            ISBN
+                            ISBN:
                         </label>
                         <input
                             type='number'
@@ -177,11 +178,11 @@ const AddPage = () => {
                         />
                         {errors.isbn ? <p className='text-white'>{errors.isbn.message}</p> : ''}
                     </div>
-                    <div>
+                    <div className='attribute'>
                         <label
                             htmlFor='pageCount'
                         >
-                            Page Count
+                            Page Count:
                         </label>
                         <input
                             type='number'

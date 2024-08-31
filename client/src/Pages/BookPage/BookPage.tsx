@@ -136,7 +136,6 @@ const BookPage = () => {
                 <>
                     <div className='bookPageContainer'>
                         <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
-                        {/* <div className='attribute'>Cover Image: {bookInfo?.coverImage}</div> */}
                         <div className='attribute'>Title: {bookInfo?.title}</div>
                         <div className='attribute'>Author: {bookInfo?.author}</div>
                         <div className='attribute'>Description: {bookInfo?.description}</div>
