@@ -23,11 +23,11 @@ Install Microsoft SQL Server Express: https://www.microsoft.com/en-us/sql-server
 Install SSMS: https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16
 - Simply click 'Install'
 
-Clone the project with the 'api' ASP.NET Web API backend and the 'client' React frontend
+Clone the project. It will have an 'api' ASP.NET Web API backend and a 'client' React frontend
 
 While in the 'api' directory, run the following commands to migrate the database:
-- dotnet ef migrations add [AnyTitleHere]
-- dotnet ef database update
+- `dotnet ef migrations add [AnyTitleHere]`
+- `dotnet ef database update`
 
 There should now be a 'library' database with the seeded roles and books
 
@@ -44,7 +44,8 @@ Where it says 'LAPTOP-Q2C4CJLG', update it with the name of your device
 You can find the name of your device by:
 - Right-clicking on the 'library' database in SSMS
 - 'Properties'
-- And then copy over the value for 'Owner' before the backslash ('\')
+- Copy over the value for 'Owner' before the slash
+  - If it says 'LAPTOP-ABC/user', just copy over the 'LAPTOP-ABC'
 
 
 Running

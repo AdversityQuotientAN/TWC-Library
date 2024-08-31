@@ -144,7 +144,9 @@ const BookPage = () => {
                         <div className='attribute'>Category: {bookInfo?.category}</div>
                         <div className='attribute'>ISBN: {bookInfo?.isbn}</div>
                         <div className='attribute'>Page Count: {bookInfo?.pageCount}</div>
-                        Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
+                        <div className='attribute'>
+                            Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
+                        </div>
                     </div>
                     <div className='actionsContainer'>
                         {(user?.userType === 'Customer') &&
