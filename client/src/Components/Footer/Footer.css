@@ -1,4 +1,9 @@
 
 .footerContainer {
+    position: fixed;
     bottom: 0;
+    padding: 1rem;
+    z-index: 100;
+    width: 100%;
+    background-color: black;
 }

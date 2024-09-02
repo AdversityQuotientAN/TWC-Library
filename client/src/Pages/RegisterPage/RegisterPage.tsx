@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useAuth } from '../../Context/useAuth'
+import './RegisterPage.css'
 
 
 type RegisterFormInputs = {
@@ -29,20 +30,18 @@ const RegisterPage = () => {
     }
 
     return (
-        <section className="">
-            <div className="">
-                <div className="">
-                <div className="">
+        <section className="formPage">
+                <div className="formContainer">
+                    <form className="" onSubmit={handleSubmit(handleRegister)}>
                     <h1 className="">
                     Register
                     </h1>
-                    <form className="" onSubmit={handleSubmit(handleRegister)}>
-                    <div>
+                    <div className='inputContainer'>
                         <label
                         htmlFor="email"
                         className=""
                         >
-                        Email:{' '}
+                        Email:
                         </label>
                         <input
                             type="text"
@@ -54,13 +53,12 @@ const RegisterPage = () => {
                         />
                         {errors.email ? <p className='text-white'>{errors.email.message}</p> : ''}
                     </div>
-                    <br />
-                    <div>
+                    <div className='inputContainer'>
                         <label
                         htmlFor="username"
                         className=""
                         >
-                        Username:{' '}
+                        Username:
                         </label>
                         <input
                             type="text"
@@ -71,13 +69,12 @@ const RegisterPage = () => {
                         />
                         {errors.userName ? <p className='text-white'>{errors.userName.message}</p> : ''}
                     </div>
-                    <br />
-                    <div>
+                    <div className='inputContainer'>
                         <label
                         htmlFor="password"
                         className=""
                         >
-                        Password:{' '}
+                        Password:
                         </label>
                         <input
                         type="password"
@@ -88,8 +85,7 @@ const RegisterPage = () => {
                         />
                         {errors.password ? <p className='text-white'>{errors.password.message}</p> : ''}
                     </div>
-                    <br />
-                    <div>
+                    <div className='userTypeContainer'>
                         <label
                         htmlFor="usertype"
                         className=""
@@ -100,20 +96,24 @@ const RegisterPage = () => {
                             type="radio"
                             id="usertype"
                             value='Customer'
-                            className=""
+                            className="userTypeInput"
                             {...register('usertype')}
                         />
-                        {' '}Librarian:
+                        <label
+                        htmlFor="usertype"
+                        className=""
+                        >
+                        Librarian:
+                        </label>
                         <input
                             type="radio"
                             id="usertype"
                             value='Librarian'
-                            className=""
+                            className="userTypeInput"
                             {...register('usertype')}
                         />
                         {errors.usertype ? <p className='text-white'>{errors.usertype.message}</p> : ''}
                     </div>
-                    <br />
                     {/* <div className="flex items-center justify-between">
                         <a
                         href="#"
@@ -122,19 +122,14 @@ const RegisterPage = () => {
                         Forgot password?
                         </a>
                     </div> */}
-                    <br />
                     <button
                         type="submit"
                         className=""
                     >
                         Sign up
                     </button>
-                    <br />
-                    <br />
                     </form>
                 </div>
-                </div>
-            </div>
         </section>
     )
 }

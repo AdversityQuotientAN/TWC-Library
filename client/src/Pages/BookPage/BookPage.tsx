@@ -130,11 +130,57 @@ const BookPage = () => {
         })
     }
 
+    // Kept saying functions like getFullYear() are not functions for some reason
+    // const dateToString = (date: Date): string => {
+
+    //     if (!date) {
+    //         return '1000-01-01'
+    //     }
+
+    //     const year = date.getFullYear()
+    //     const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    //     const day = date.getDate().toString().padStart(2, '0')
+
+    //     const formattedDate = `${year}-${month}-${day}`;
+
+    //     return formattedDate
+    // }
+
     return (
         <div className='bookPage'>
             {!isLoggedIn() ? 'Log in to view this book!' : loading ? 'Loading...' : 
                 <>
-                    <div className='bookPageContainer'>
+                    <div className='leftContainer'>
+                        <div className='imageContainer'>
+                            <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
+                        </div>
+                        <div className='attribute'>
+                                Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
+                        </div>
+                        <div className='actionsContainer'>
+                            {(user?.userType === 'Customer') &&
+                                <div>
+                                    <button onClick={checkOut} disabled={new Date(bookInfo?.availableUntil).getTime() > Date.now()}>
+                                        Checkout
+                                    </button>
+                                </div>
+                            }
+                            {(user?.userType === "Librarian") &&
+                                <div>
+                                    <button onClick={returnBook} disabled={new Date(bookInfo?.availableUntil).getTime() < Date.now()}>
+                                        Return
+                                    </button>
+                                    {/* <button onClick={() => setEditMode(!editMode)}>
+                                        Edit
+                                    </button> */}
+                                    <button onClick={deleteBook}>
+                                        Delete
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    {/* <div className='bookPageContainer'>
                         <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
                         <div className='attribute'>Title: {bookInfo?.title}</div>
                         <div className='attribute'>Author: {bookInfo?.author}</div>
@@ -147,181 +193,150 @@ const BookPage = () => {
                         <div className='attribute'>
                             Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
                         </div>
-                    </div>
-                    <div className='actionsContainer'>
-                        {(user?.userType === 'Customer') &&
-                            <div>
-                                <button onClick={checkOut} disabled={new Date(bookInfo?.availableUntil).getTime() > Date.now()}>
-                                    Checkout
-                                </button>
-                            </div>
-                        }
-                        {(user?.userType === "Librarian") &&
-                            <div>
-                                <button onClick={returnBook} disabled={new Date(bookInfo?.availableUntil).getTime() < Date.now()}>
-                                    Return
-                                </button>
-                                <button onClick={() => setEditMode(!editMode)}>
-                                    Edit
-                                </button>
-                                <button onClick={deleteBook}>
-                                    Delete
-                                </button>
-                            </div>
-                        }
-                    </div>
-                    {editMode && 
-                    <div className='editContainer'>
-                        <form onSubmit={handleSubmit(EditBook)}>
-                            <div>
-                                <label
-                                    htmlFor='title'
-                                >
-                                    Title:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='title'
-                                    placeholder={bookInfo?.title}
-                                    // value={bookInfo?.title}
-                                    // onChange={handleInputUpdate}
-                                    {...register('title')}
-                                />
-                                {errors.title ? <p className='text-white'>{errors.title.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='author'
-                                >
-                                    Author:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='author'
-                                    placeholder={bookInfo?.author}
-                                    // value={bookInfo?.author}
-                                    // onChange={handleInputUpdate}
-                                    {...register('author')}
-                                />
-                                {errors.author ? <p className='text-white'>{errors.author.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='description'
-                                >
-                                    Description:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='description'
-                                    placeholder={bookInfo?.description}
-                                    // value={bookInfo?.description}
-                                    // onChange={handleInputUpdate}
-                                    {...register('description')}
-                                />
-                                {errors.description ? <p className='text-white'>{errors.description.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='coverImage'
-                                >
-                                    Cover Image:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='coverImage'
-                                    placeholder={bookInfo?.coverImage}
-                                    // value={bookInfo?.coverImage}
-                                    // onChange={handleInputUpdate}
-                                    {...register('coverImage')}
-                                />
-                                {errors.coverImage ? <p className='text-white'>{errors.coverImage.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='publisher'
-                                >
-                                    Publisher:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='publisher'
-                                    placeholder={bookInfo?.publisher}
-                                    // value={bookInfo?.publisher}
-                                    // onChange={handleInputUpdate}
-                                    {...register('publisher')}
-                                />
-                                {errors.publisher ? <p className='text-white'>{errors.publisher.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='publicationDate'
-                                >
-                                    Publication Date:
-                                </label>
-                                <input
-                                    type='date'
-                                    id='publicationDate'
-                                    placeholder={bookInfo?.publicationDate.toString()}
-                                    // value={bookInfo?.publicationDate.toString()}
-                                    // onChange={handleInputUpdate}
-                                    {...register('publicationDate')}
-                                />
-                                {errors.publicationDate ? <p className='text-white'>{errors.publicationDate.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='category'
-                                >
-                                    Category:
-                                </label>
-                                <input
-                                    type='text'
-                                    id='category'
-                                    placeholder={bookInfo?.category}
-                                    // value={bookInfo?.category}
-                                    // onChange={handleInputUpdate}
-                                    {...register('category')}
-                                />
-                                {errors.category ? <p className='text-white'>{errors.category.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='isbn'
-                                >
-                                    ISBN:
-                                </label>
-                                <input
-                                    type='number'
-                                    id='isbn'
-                                    placeholder={bookInfo?.isbn.toString()}
-                                    // value={bookInfo?.isbn}
-                                    // onChange={handleInputUpdate}
-                                    {...register('isbn')}
-                                />
-                                {errors.isbn ? <p className='text-white'>{errors.isbn.message}</p> : ''}
-                            </div>
-                            <div>
-                                <label
-                                    htmlFor='pageCount'
-                                >
-                                    Page Count:
-                                </label>
-                                <input
-                                    type='number'
-                                    id='pageCount'
-                                    placeholder={bookInfo?.pageCount.toString()}
-                                    // value={bookInfo?.pageCount}
-                                    // onChange={handleInputUpdate}
-                                    {...register('pageCount')}
-                                />
-                                {errors.pageCount ? <p className='text-white'>{errors.pageCount.message}</p> : ''}
-                            </div>
+                    </div> */}
+                    <div className='infoContainer'>
+                        <div className='formContainer'>
+                            <form onSubmit={handleSubmit(EditBook)}>
+                                <div>
+                                    <label
+                                        htmlFor='title'
+                                    >
+                                        Title:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='title'
+                                        defaultValue={bookInfo?.title}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('title')}
+                                    />
+                                    {errors.title ? <p className='text-white'>{errors.title.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='author'
+                                    >
+                                        Author:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='author'
+                                        defaultValue={bookInfo?.author}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('author')}
+                                    />
+                                    {errors.author ? <p className='text-white'>{errors.author.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='description'
+                                    >
+                                        Description:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='description'
+                                        defaultValue={bookInfo?.description}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('description')}
+                                    />
+                                    {errors.description ? <p className='text-white'>{errors.description.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='coverImage'
+                                    >
+                                        Cover Image:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='coverImage'
+                                        defaultValue={bookInfo?.coverImage}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('coverImage')}
+                                    />
+                                    {errors.coverImage ? <p className='text-white'>{errors.coverImage.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='publisher'
+                                    >
+                                        Publisher:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='publisher'
+                                        defaultValue={bookInfo?.publisher}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('publisher')}
+                                    />
+                                    {errors.publisher ? <p className='text-white'>{errors.publisher.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='publicationDate'
+                                    >
+                                        Publication Date: {bookInfo?.publicationDate.toString()}
+                                    </label>
+                                    <input
+                                        type='date'
+                                        id='publicationDate'
+                                        // defaultValue={bookInfo?.publicationDate}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('publicationDate')}
+                                    />
+                                    {errors.publicationDate ? <p className='text-white'>{errors.publicationDate.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='category'
+                                    >
+                                        Category:
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='category'
+                                        defaultValue={bookInfo?.category}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('category')}
+                                    />
+                                    {errors.category ? <p className='text-white'>{errors.category.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='isbn'
+                                    >
+                                        ISBN:
+                                    </label>
+                                    <input
+                                        type='number'
+                                        id='isbn'
+                                        defaultValue={bookInfo?.isbn}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('isbn')}
+                                    />
+                                    {errors.isbn ? <p className='text-white'>{errors.isbn.message}</p> : ''}
+                                </div>
+                                <div>
+                                    <label
+                                        htmlFor='pageCount'
+                                    >
+                                        Page Count:
+                                    </label>
+                                    <input
+                                        type='number'
+                                        id='pageCount'
+                                        defaultValue={bookInfo?.pageCount}
+                                        disabled={user?.userType !== 'Librarian'}
+                                        {...register('pageCount')}
+                                    />
+                                    {errors.pageCount ? <p className='text-white'>{errors.pageCount.message}</p> : ''}
+                                </div>
 
-                            <button type='submit'>Update book</button>
-                        </form>
+                                {user?.userType === 'Librarian' && <button type='submit'>Update book</button>}
+                            </form>
+                        </div>
                     </div>
-                    }
                 </>
             }
         </div>

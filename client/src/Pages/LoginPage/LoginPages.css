@@ -1,4 +1,56 @@
 
-.formContainer input {
+/* .formPage {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.formContainer h1 {
     margin: 1rem;
 }
+
+.formContainer {
+    border-radius: 0.5rem;
+    padding: 2rem;
+    width: 30%;
+    display: flex;
+    background: transparent;
+    border: 2px solid white;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+    justify-content: center;
+    place-items: center;
+}
+
+.formContainer button {
+    width: 80%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+
+.formContainer button:hover {
+    color: black;
+    background-color: white;
+}
+
+.formContainer input {
+    margin: 1rem;
+    /* width: 10rem; */
+    height: 2rem;
+    background: transparent;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 0.8rem;
+    color: white;
+    padding: 0.2rem;
+    padding-left: 0.4rem;
+}
+
+.inputContainer {
+    width: 100%;
+    height: 5rem;
+    margin: 1rem 0;
+} */

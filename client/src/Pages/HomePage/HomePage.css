@@ -10,6 +10,9 @@
 .bookContainer {
     border: 2px solid gray;
     border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     margin: 1rem;
     padding: 0.5rem;
     height: 30rem;
