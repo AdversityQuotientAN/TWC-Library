@@ -64,14 +64,6 @@ const LoginPage = () => {
                         />
                         {errors.password ? <p className='text-white'>{errors.password.message}</p> : ''}
                     </div>
-                    {/* <div className="flex items-center justify-between">
-                        <a
-                        href="#"
-                        className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        >
-                        Forgot password?
-                        </a>
-                    </div> */}
                     <button
                         type="submit"
                         className=""

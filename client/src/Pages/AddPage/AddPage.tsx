@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Yup from 'yup'
-// import { useAuth } from '../../Context/useAuth'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
@@ -68,10 +67,10 @@ const AddPage = () => {
     }
 
     return (
-        <section>
-            <div>
-                <h1>Add Book</h1>
-                <form onSubmit={handleSubmit(AddBook)}>
+        <section className='formPage' style={{ 'margin-top': '4rem', 'margin-bottom': '3rem' }}>
+            <div className='formContainer'>
+                <form className='form' onSubmit={handleSubmit(AddBook)}>
+                    <h1>Add Book</h1>
                     <div className='attribute'>
                         <label
                             htmlFor='title'

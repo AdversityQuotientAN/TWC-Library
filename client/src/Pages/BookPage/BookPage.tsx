@@ -55,18 +55,6 @@ const BookPage = () => {
         })
     }, [])
 
-    // const handleInputUpdate = (e) => {
-    //     e.preventDefault()
-    //     const form = e.target
-    //     const field = form.elements[0].name
-    //     const value = form.elements[0].value
-    //     // setBookInfo({
-    //     //     ...bookInfo,
-    //     //     [field]: value
-    //     // })
-    //     console.log(field, value)
-    // }
-
     const checkOut = () => {
         axios.put(`${api}book/checkout/${id}`).then(() => {
             toast.success(`Successfully checked out '${bookInfo?.title}'!`)
@@ -170,9 +158,6 @@ const BookPage = () => {
                                     <button onClick={returnBook} disabled={new Date(bookInfo?.availableUntil).getTime() < Date.now()}>
                                         Return
                                     </button>
-                                    {/* <button onClick={() => setEditMode(!editMode)}>
-                                        Edit
-                                    </button> */}
                                     <button onClick={deleteBook}>
                                         Delete
                                     </button>
@@ -180,20 +165,6 @@ const BookPage = () => {
                             }
                         </div>
                     </div>
-                    {/* <div className='bookPageContainer'>
-                        <img className='bookImage' src={`/images/${bookInfo?.coverImage}`} alt={bookInfo?.coverImage} />
-                        <div className='attribute'>Title: {bookInfo?.title}</div>
-                        <div className='attribute'>Author: {bookInfo?.author}</div>
-                        <div className='attribute'>Description: {bookInfo?.description}</div>
-                        <div className='attribute'>Publisher: {bookInfo?.publisher}</div>
-                        <div className='attribute'>Publication Date: {bookInfo?.publicationDate.toString()}</div>
-                        <div className='attribute'>Category: {bookInfo?.category}</div>
-                        <div className='attribute'>ISBN: {bookInfo?.isbn}</div>
-                        <div className='attribute'>Page Count: {bookInfo?.pageCount}</div>
-                        <div className='attribute'>
-                            Available: {new Date(bookInfo?.availableUntil).getTime() > Date.now() ? new Date(bookInfo?.availableUntil).toDateString() : 'Now'}
-                        </div>
-                    </div> */}
                     <div className='infoContainer'>
                         <div className='formContainer'>
                             <form onSubmit={handleSubmit(EditBook)}>

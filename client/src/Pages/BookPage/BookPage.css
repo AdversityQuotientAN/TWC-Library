@@ -10,26 +10,10 @@
     width: 100%;
 }
 
-/* .bookPageContainer {
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-} */
-
 .bookImage {
     margin-left: auto;
     margin-top: 0;
-    /* position: fixed; */
     top: 10rem;
-}
-
-.imageContainer {
-    /* margin-left: auto; */
-    /* width: 30%;
-    position: relative;
-    top: -20rem */
 }
 
 .infoContainer {
@@ -55,7 +39,6 @@
 
 .leftContainer {
     margin-left: auto;
-    /* margin-right: auto; */
     display: flex;
     flex-direction: column;
     align-items: center;

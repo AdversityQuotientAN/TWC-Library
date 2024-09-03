@@ -16,7 +16,5 @@ namespace api.Models
         public int Rating { get; set; }
         public int? BookId { get; set; }
         public Book? Book { get; set; }     // Navigation property which allows us to access the Book model
-        // public string AppUserId { get; set; }
-        // public AppUser AppUser { get; set; }
     }
 }

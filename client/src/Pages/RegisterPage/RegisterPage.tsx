@@ -114,14 +114,6 @@ const RegisterPage = () => {
                         />
                         {errors.usertype ? <p className='text-white'>{errors.usertype.message}</p> : ''}
                     </div>
-                    {/* <div className="flex items-center justify-between">
-                        <a
-                        href="#"
-                        className=""
-                        >
-                        Forgot password?
-                        </a>
-                    </div> */}
                     <button
                         type="submit"
                         className=""

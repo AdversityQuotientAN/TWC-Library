@@ -1,7 +1,6 @@
 
 
 .bookSection {
-    /* top: -6rem; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -31,12 +30,10 @@
 .filterContainer {
     margin-top: 5rem;
     width: 100%;
-    /* top: -8rem; */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* position: absolute; */
 }
 
 .input {

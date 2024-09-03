@@ -54,8 +54,6 @@
   width: 30%;
   display: flex;
   background: transparent;
-  /* border: 2px solid white; */
-  /* box-shadow: 0 0 1rem rgba(0, 0, 0, .2); */
   justify-content: center;
   place-items: center;
 }
@@ -77,7 +75,6 @@
 
 .formContainer input {
   margin: 1rem;
-  /* width: 10rem; */
   height: 2rem;
   background: transparent;
   outline: none;
